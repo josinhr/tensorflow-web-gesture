@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { TensorflowWebGestureModule } from 'dist/libs/tensorflow-web-gesture';
+import { TensorflowWebGestureModule } from 'tensorflow-web-gesture';
 
 import { AppComponent } from './app.component';
 

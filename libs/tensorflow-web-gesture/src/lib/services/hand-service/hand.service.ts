@@ -10,32 +10,43 @@ import { Injectable } from '@angular/core';
 
 //The data manager
 @Injectable()
-export class HandGesture {
+export class HandGestureService {
   private video: HTMLVideoElement;
   private movementEstimator: MovementEstimation;
   private gestureEstimator: GestureEstimation;
 
   private _swipe$ = new BehaviorSubject<Direction>('none');
-  readonly swipe$ = this._swipe$.asObservable();
+  private swipe$ = this._swipe$.asObservable();
 
   private _gesture$ = new BehaviorSubject<Gesture>('none');
-  readonly gesture$ = this._gesture$.asObservable();
+  private gesture$ = this._gesture$.asObservable();
 
   public subscribers: Subscribers;
 
   constructor() {
+    const vid = document.createElement('video');
+    vid.autoplay = true;
+    vid.width = 640;
+    vid.height = 480;
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then(function success(streamReceived) {
+        vid.srcObject = streamReceived;
+      });
+    this.setVideo(vid);
+    this.runModel();
+    this.movementEstimator = new MovementEstimation([vid.width, vid.height]);
+
     this.gestureEstimator = new GestureEstimation();
     this.initializeSubscribers();
   }
-  initializeSubscribers(): void {
+  private initializeSubscribers(): void {
     //Output of recognition -> Listens to the data manager
     this.subscribers = {
       right: this.swipe$.pipe(filter((value) => value === 'right')),
       left: this.swipe$.pipe(filter((value) => value === 'left')),
       ok: this.gesture$.pipe(filter((value) => value === 'thumbs_up')),
       victory: this.gesture$.pipe(filter((value) => value === 'victory')),
-      //ok
-      //victory
     };
   }
   setVideo(video: HTMLVideoElement) {

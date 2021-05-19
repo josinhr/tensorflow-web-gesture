@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HandGesture } from '../../services';
+import { HandGestureService } from '../../services';
 import { ImageService } from '../../services';
 
 @Component({
@@ -10,7 +10,7 @@ import { ImageService } from '../../services';
 export class GestureFeedbackComponent {
   public image: string;
 
-  public constructor(private handGesture: HandGesture) {
+  public constructor(private handGesture: HandGestureService) {
     this.image = ImageService.getImageURL(ImageService.imagesType.unknown);
     this.handGesture.subscribers.right.subscribe(
       () =>
