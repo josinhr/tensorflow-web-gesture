@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "lib-appliance",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    }
+  },
+  "projects": {
+    "lib-appliance": {
+      "projectType": "application",
+      "root": "apps/lib-appliance",
+      "sourceRoot": "apps/lib-appliance/src",
+      "prefix": "tensorflow-web-gesture",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/lib-appliance",
+            "index": "apps/lib-appliance/src/index.html",
+            "main": "apps/lib-appliance/src/main.ts",
+            "polyfills": "apps/lib-appliance/src/polyfills.ts",
+            "tsConfig": "apps/lib-appliance/tsconfig.app.json",
+            "assets": [
+              "apps/lib-appliance/src/favicon.ico",
+              "apps/lib-appliance/src/assets"
+            ],
+            "styles": ["apps/lib-appliance/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/lib-appliance/src/environments/environment.ts",
+                  "with": "apps/lib-appliance/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "lib-appliance:build:production"
+            },
+            "development": {
+              "browserTarget": "lib-appliance:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lib-appliance:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/lib-appliance/src/**/*.ts",
+              "apps/lib-appliance/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/lib-appliance"],
+          "options": {
+            "jestConfig": "apps/lib-appliance/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lib-appliance-e2e": {
+      "root": "apps/lib-appliance-e2e",
+      "sourceRoot": "apps/lib-appliance-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/lib-appliance-e2e/cypress.json",
+            "tsConfig": "apps/lib-appliance-e2e/tsconfig.e2e.json",
+            "devServerTarget": "lib-appliance:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lib-appliance:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/lib-appliance-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
