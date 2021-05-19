@@ -148,6 +148,46 @@
           }
         }
       }
+    },
+    "tensorflow-web-gesture": {
+      "projectType": "library",
+      "root": "libs/tensorflow-web-gesture",
+      "sourceRoot": "libs/tensorflow-web-gesture/src",
+      "prefix": "tensorflow-web-gesture",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/tensorflow-web-gesture/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/tensorflow-web-gesture/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/tensorflow-web-gesture/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tensorflow-web-gesture"],
+          "options": {
+            "jestConfig": "libs/tensorflow-web-gesture/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/tensorflow-web-gesture/src/**/*.ts",
+              "libs/tensorflow-web-gesture/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   }
 }
