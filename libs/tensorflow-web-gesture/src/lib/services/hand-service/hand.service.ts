@@ -47,6 +47,7 @@ export class HandGestureService {
       left: this.swipe$.pipe(filter((value) => value === 'left')),
       ok: this.gesture$.pipe(filter((value) => value === 'thumbs_up')),
       victory: this.gesture$.pipe(filter((value) => value === 'victory')),
+      one: this.gesture$.pipe(filter((value) => value === 'one_finger')),
     };
   }
   setVideo(video: HTMLVideoElement) {

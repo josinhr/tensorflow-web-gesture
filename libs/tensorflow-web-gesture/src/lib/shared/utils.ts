@@ -25,7 +25,8 @@ function getMiddle(rect: Rect): Point {
 
 type Size = [number, number];
 type Point = [number, number];
-type Gesture =  //"one" |
+type Gesture =
+  | 'one_finger'
   | 'victory'
   | 'thumbs_up'
   //"notOk" |
@@ -38,6 +39,7 @@ type Subscribers = {
   right: Observable<Direction>;
   ok: Observable<Gesture>;
   victory: Observable<Gesture>;
+  one: Observable<Gesture>;
 };
 
 export {

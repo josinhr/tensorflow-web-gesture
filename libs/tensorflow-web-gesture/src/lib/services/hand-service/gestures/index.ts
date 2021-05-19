@@ -8,7 +8,7 @@ const victoryGesture = fingerpose.Gestures.VictoryGesture;
 const thumbsUpGesture = fingerpose.Gestures.ThumbsUpGesture;
 
 export const GE = new fingerpose.GestureEstimator([
-  //oneFingerGesture,
+  oneFingerGesture,
   //thumbsDownGesture,
   victoryGesture,
   thumbsUpGesture,
