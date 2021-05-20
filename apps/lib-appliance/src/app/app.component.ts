@@ -10,11 +10,8 @@ import { HandGestureService } from 'tensorflow-web-gesture';
 })
 export class AppComponent implements AfterViewInit {
   title = 'lib-appliance';
-  handGestureService: HandGestureService;
 
-  public constructor() {
-    this.handGestureService = new HandGestureService();
-  }
+  public constructor(public handGestureService: HandGestureService) {}
   ngAfterViewInit(): void {
     const vid = <HTMLVideoElement>document.getElementById('videoElement');
 
