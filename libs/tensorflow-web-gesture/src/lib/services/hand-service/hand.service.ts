@@ -22,23 +22,25 @@ export class HandGestureService {
   private gesture$ = this._gesture$.asObservable();
 
   public subscribers: Subscribers;
-
   constructor() {
-    const vid = document.createElement('video');
-    vid.autoplay = true;
-    vid.width = 640;
-    vid.height = 480;
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then(function success(streamReceived) {
-        vid.srcObject = streamReceived;
-      });
-    this.setVideo(vid);
-    this.runModel();
-    this.movementEstimator = new MovementEstimation([vid.width, vid.height]);
-
     this.gestureEstimator = new GestureEstimation();
     this.initializeSubscribers();
+  }
+
+  init(vid: HTMLVideoElement) {
+    vid.addEventListener(
+      'loadeddata',
+      () => {
+        this.video = vid;
+        this.movementEstimator = new MovementEstimation([
+          vid.width,
+          vid.height,
+        ]);
+        this.runModel();
+        // Video is loaded and can be played
+      },
+      false
+    );
   }
   private initializeSubscribers(): void {
     //Output of recognition -> Listens to the data manager
@@ -49,13 +51,6 @@ export class HandGestureService {
       victory: this.gesture$.pipe(filter((value) => value === 'victory')),
       one: this.gesture$.pipe(filter((value) => value === 'one_finger')),
     };
-  }
-  setVideo(video: HTMLVideoElement) {
-    this.video = video;
-    this.movementEstimator = new MovementEstimation([
-      video.width,
-      video.height,
-    ]);
   }
 
   runModel() {
