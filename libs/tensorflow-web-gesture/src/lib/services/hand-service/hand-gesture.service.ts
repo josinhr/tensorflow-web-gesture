@@ -31,7 +31,7 @@ export class GestureEstimation {
       } else if (
         this.emitGesture &&
         toSeconds(Date.now() - this.lastGestureTiemstamp) > 1 &&
-        confidence[0] > 5
+        confidence[0] > 6
       ) {
         emitPoint.next(gesture.gestures[maxConfidence].name);
         this.emitGesture = false;

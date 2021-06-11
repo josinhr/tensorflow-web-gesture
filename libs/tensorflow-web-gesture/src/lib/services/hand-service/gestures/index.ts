@@ -3,15 +3,14 @@
 import * as fingerpose from 'fingerpose';
 import { oneFingerGesture } from './oneFingerGesture';
 import { noFingerGesture } from './noFingerGesture';
-// import { thumbsDownGesture } from './thumbsDownGesture';
+import { victoryGesture } from './victoryGesture';
+// import { thumbsUpGesture } from './thumbsUpGesture';
 
-const victoryGesture = fingerpose.Gestures.VictoryGesture;
 const thumbsUpGesture = fingerpose.Gestures.ThumbsUpGesture;
 
 export const GE = new fingerpose.GestureEstimator([
   oneFingerGesture,
   noFingerGesture,
-  //thumbsDownGesture,
   victoryGesture,
   thumbsUpGesture,
 ]);
