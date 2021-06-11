@@ -1,6 +1,7 @@
 {
   "version": 1,
   "cli": {
+    "analytics": "45f86eeb-8bf3-4bfe-b9bf-d2ba33599499",
     "defaultCollection": "@nrwl/angular"
   },
   "defaultProject": "lib-appliance",

@@ -2,6 +2,8 @@ export class ImageService {
   static imagesType = {
     right: 'right',
     one: 'one',
+    up: 'up',
+    down: 'down',
     left: 'left',
     ok: 'ok',
     victory: 'victory',

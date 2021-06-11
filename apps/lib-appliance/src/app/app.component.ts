@@ -16,8 +16,5 @@ export class AppComponent implements AfterViewInit {
     const vid = <HTMLVideoElement>document.getElementById('videoElement');
 
     this.handGestureService.init(vid);
-    this.handGestureService.subscribers.right.subscribe(() =>
-      console.log('derecha')
-    );
   }
 }

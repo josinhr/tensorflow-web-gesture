@@ -20,6 +20,13 @@ export class GestureFeedbackComponent {
       () =>
         (this.image = ImageService.getImageURL(ImageService.imagesType.left))
     );
+    this.handGesture.subscribers.up.subscribe(
+      () => (this.image = ImageService.getImageURL(ImageService.imagesType.up))
+    );
+    this.handGesture.subscribers.down.subscribe(
+      () =>
+        (this.image = ImageService.getImageURL(ImageService.imagesType.down))
+    );
     this.handGesture.subscribers.ok.subscribe(
       () => (this.image = ImageService.getImageURL(ImageService.imagesType.ok))
     );

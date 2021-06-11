@@ -6,6 +6,7 @@ import {
   inRegion,
   toSeconds,
   Size,
+  inRegionY,
 } from '../../shared/utils';
 import { BehaviorSubject } from 'rxjs';
 import { Direction } from '../../shared/utils';
@@ -28,6 +29,23 @@ export class MovementEstimation {
     if (!this.initiated) {
       return;
     }
+    if (
+      inRegionY(0, 0.2, middle, this.dimensions) &&
+      toSeconds(Date.now() - this.initialTimestamp) < 2
+    ) {
+      emitPoint.next('up');
+      this.initiated = false;
+      return;
+    }
+    if (
+      inRegionY(0.8, 1, middle, this.dimensions) &&
+      toSeconds(Date.now() - this.initialTimestamp) < 2
+    ) {
+      emitPoint.next('down');
+      this.initiated = false;
+      return;
+    }
+
     if (
       inRegion(0, 0.1, middle, this.dimensions) &&
       toSeconds(Date.now() - this.initialTimestamp) < 2

@@ -16,6 +16,15 @@ function inRegion(
 ): boolean {
   return dimensions[0] * start < point[0] && dimensions[0] * end > point[0];
 }
+function inRegionY(
+  start: number,
+  end: number,
+  point: Point,
+  dimensions: Size
+): boolean {
+  return dimensions[1] * start < point[1] && dimensions[1] * end > point[1];
+}
+
 function getMiddle(rect: Rect): Point {
   return [
     rect.topLeft[0] + (rect.topLeft[0] + rect.bottomRight[0]) / 2,
@@ -31,12 +40,14 @@ type Gesture =
   | 'thumbs_up'
   //"notOk" |
   | 'none';
-type Direction = 'left' | 'right' | 'none';
+type Direction = 'left' | 'right' | 'up' | 'down' | 'none';
 type Rect = { topLeft: [number, number]; bottomRight: [number, number] };
 
 type Subscribers = {
   left: Observable<Direction>;
   right: Observable<Direction>;
+  up: Observable<Direction>;
+  down: Observable<Direction>;
   ok: Observable<Gesture>;
   victory: Observable<Gesture>;
   one: Observable<Gesture>;
@@ -52,5 +63,6 @@ export {
   Gesture,
   Direction,
   Rect,
+  inRegionY,
   Subscribers,
 };
