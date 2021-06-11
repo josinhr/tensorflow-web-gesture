@@ -37,5 +37,9 @@ export class GestureFeedbackComponent {
     this.handGesture.subscribers.one.subscribe(
       () => (this.image = ImageService.getImageURL(ImageService.imagesType.one))
     );
+    this.handGesture.subscribers.cero.subscribe(
+      () =>
+        (this.image = ImageService.getImageURL(ImageService.imagesType.cero))
+    );
   }
 }

@@ -50,6 +50,7 @@ export class HandGestureService {
       up: this.swipe$.pipe(filter((value) => value === 'up')),
       down: this.swipe$.pipe(filter((value) => value === 'down')),
       ok: this.gesture$.pipe(filter((value) => value === 'thumbs_up')),
+      cero: this.gesture$.pipe(filter((value) => value === 'cero')),
       victory: this.gesture$.pipe(filter((value) => value === 'victory')),
       one: this.gesture$.pipe(filter((value) => value === 'one_finger')),
     };

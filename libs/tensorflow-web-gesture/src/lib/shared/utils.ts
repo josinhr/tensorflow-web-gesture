@@ -38,6 +38,7 @@ type Gesture =
   | 'one_finger'
   | 'victory'
   | 'thumbs_up'
+  | 'cero'
   //"notOk" |
   | 'none';
 type Direction = 'left' | 'right' | 'up' | 'down' | 'none';
@@ -51,6 +52,7 @@ type Subscribers = {
   ok: Observable<Gesture>;
   victory: Observable<Gesture>;
   one: Observable<Gesture>;
+  cero: Observable<Gesture>;
 };
 
 export {
