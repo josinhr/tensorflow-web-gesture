@@ -7,9 +7,9 @@ import {
   toSeconds,
   Size,
   inRegionY,
+  Direction,
 } from '../../shared/utils';
 import { BehaviorSubject } from 'rxjs';
-import { Direction } from '../../shared/utils';
 
 export class MovementEstimation {
   private initialTimestamp = -1;
