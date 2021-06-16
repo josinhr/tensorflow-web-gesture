@@ -31,6 +31,9 @@ function getMiddle(rect: Rect): Point {
     rect.topLeft[1] + (rect.topLeft[1] + rect.bottomRight[1]) / 2,
   ];
 }
+function getMiddleHandTrack(hand: any): Point {
+  return [hand.bbox[0], hand.bbox[1]];
+}
 
 type Size = [number, number];
 type Point = [number, number];
@@ -67,4 +70,5 @@ export {
   Rect,
   inRegionY,
   Subscribers,
+  getMiddleHandTrack,
 };
