@@ -49,9 +49,16 @@
             "tsConfig": "apps/lib-appliance/tsconfig.app.json",
             "assets": [
               "apps/lib-appliance/src/favicon.ico",
-              "apps/lib-appliance/src/assets"
+              "apps/lib-appliance/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/tensorflow-web-gesture/assets",
+                "output": "/assets/"
+              }
             ],
-            "styles": ["apps/lib-appliance/src/styles.css"],
+            "styles": [
+              "apps/lib-appliance/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -116,7 +123,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/lib-appliance"],
+          "outputs": [
+            "coverage/apps/lib-appliance"
+          ],
           "options": {
             "jestConfig": "apps/lib-appliance/jest.config.js",
             "passWithNoTests": true
@@ -145,7 +154,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/lib-appliance-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/lib-appliance-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -173,7 +184,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/tensorflow-web-gesture"],
+          "outputs": [
+            "coverage/libs/tensorflow-web-gesture"
+          ],
           "options": {
             "jestConfig": "libs/tensorflow-web-gesture/jest.config.js",
             "passWithNoTests": true
