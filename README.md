@@ -74,6 +74,7 @@ The part you should add is:
 Or you can create also your own video element.
 
   5.Now everything is working. In every class you want to use this service you just need to inject it in the constructor.
+  
   6. Finally we propose two ways to use the endpoints of our detector:
   
    6.1.The use of the async function. You can use directly in html, so will perform something when the subscriber receives a message.
