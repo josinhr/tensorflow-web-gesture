@@ -1,5 +1,4 @@
-import { AfterViewInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { HandGestureService } from 'tensorflow-web-gesture';
 
 @Component({
