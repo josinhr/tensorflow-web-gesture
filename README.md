@@ -76,13 +76,13 @@ Or you can create also your own video element.
   5.Now everything is working. In every class you want to use this service you just need to inject it in the constructor.
   6. Finally we propose two ways to use the endpoints of our detector:
   
-   1.The use of the async function. You can use directly in html, so will perform something when the subscriber receives a message.
+   6.1.The use of the async function. You can use directly in html, so will perform something when the subscriber receives a message.
   
     <div *ngIf="(handGestureService.subscribers.left | async) === 'left'">
        Hello world
     </div>
     
-   2.The use of subscribers. This use is not recommended, you would have to manage the subscriptions and unsubscription. You can include that code inside the constructor.
+   6.2.The use of subscribers. This use is not recommended, you would have to manage the subscriptions and unsubscription. You can include that code inside the constructor.
    
      handGestureService.subscribers.right.subscribe(() => {
       consoloe.log('Hello world')
