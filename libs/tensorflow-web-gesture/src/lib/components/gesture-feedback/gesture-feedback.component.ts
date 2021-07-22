@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { HandGestureService } from '../../services';
-import { ImageService } from '../../services';
-
+import { HandGestureService, ImageService } from '../../services';
 @Component({
   selector: 'tensorflow-web-gesture-gesture-feedback',
   templateUrl: './gesture-feedback.component.html',

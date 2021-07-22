@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { GE } from './gestures';
-import { toSeconds } from '../../shared/utils';
+import { toSeconds, Gesture } from '../../shared/utils';
 import { BehaviorSubject } from 'rxjs';
-import { Gesture } from '../../shared/utils';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 export class GestureEstimation {
   private lastGestureTiemstamp = -1;
