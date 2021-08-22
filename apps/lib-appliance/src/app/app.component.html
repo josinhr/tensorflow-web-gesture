@@ -1,12 +1,6 @@
 <div class="main-container">
-  <tensorflow-web-gesture-shadow-tutorial></tensorflow-web-gesture-shadow-tutorial>
-  <div class="video-feedback">
-    <tensorflow-web-gesture-video class="video"></tensorflow-web-gesture-video>
-    <tensorflow-web-gesture-gesture-feedback
-      class="feedback"
-    ></tensorflow-web-gesture-gesture-feedback>
-    <div *ngIf="(handGestureService.subscribers.left | async) === 'left'">
-      Has movido a la izquierda
-    </div>
-  </div>
+  <tensorflow-web-gesture-movement-tutorial></tensorflow-web-gesture-movement-tutorial>
+</div>
+<div *ngIf="(handGestureService.subscribers.left | async) === 'left'">
+  Has movido a la izquierda
 </div>

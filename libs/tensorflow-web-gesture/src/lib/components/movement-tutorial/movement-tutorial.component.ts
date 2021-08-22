@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { HandGestureService, ImageService } from '../../services';
 
 @Component({
-  selector: 'tensorflow-web-gesture-shadow-tutorial',
-  templateUrl: './shadow-tutorial.component.html',
-  styleUrls: ['./shadow-tutorial.component.css'],
+  selector: 'tensorflow-web-gesture-movement-tutorial',
+  templateUrl: './movement-tutorial.component.html',
+  styleUrls: ['./movement-tutorial.component.css'],
 })
-export class ShadowTutorialComponent {
+export class MovementTutorialComponent {
   image: string;
 
   constructor(
     public handGesture: HandGestureService,
     public imageService: ImageService
   ) {
-    const subscribers = handGesture.getSubscribersArray();
+    const subscribers = handGesture.getMovementSubscribersArray();
     const subscribersKeys = Array.from(subscribers.keys());
     const longitud = subscribers.size;
     this.image = imageService.getImageURL(

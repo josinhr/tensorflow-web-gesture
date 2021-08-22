@@ -4,16 +4,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VideoComponent } from './components/gesture-recognition/video.component';
 import { GestureFeedbackComponent } from './components/gesture-feedback/gesture-feedback.component';
 import { HandGestureService, ImageService } from './services';
-import { ShadowTutorialComponent } from './components/shadow-tutorial/shadow-tutorial.component';
+import { MovementTutorialComponent } from './components/movement-tutorial/movement-tutorial.component';
+import { PoseTutorialComponent } from './components/pose-tutorial/pose-tutorial.component';
 
 @NgModule({
   imports: [CommonModule, BrowserAnimationsModule],
   declarations: [
     GestureFeedbackComponent,
     VideoComponent,
-    ShadowTutorialComponent,
+    MovementTutorialComponent,
+    PoseTutorialComponent,
   ],
-  exports: [GestureFeedbackComponent, VideoComponent, ShadowTutorialComponent],
+  exports: [
+    GestureFeedbackComponent,
+    VideoComponent,
+    MovementTutorialComponent,
+    PoseTutorialComponent,
+  ],
   providers: [HandGestureService, ImageService],
 })
 export class TensorflowWebGestureModule {}

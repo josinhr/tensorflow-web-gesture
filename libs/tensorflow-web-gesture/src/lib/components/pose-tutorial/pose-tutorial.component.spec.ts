@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShadowTutorialComponent } from './shadow-tutorial.component';
+import { PoseTutorialComponent } from './pose-tutorial.component';
 
-describe('ShadowTutorialComponent', () => {
-  let component: ShadowTutorialComponent;
-  let fixture: ComponentFixture<ShadowTutorialComponent>;
+describe('PoseTutorialComponent', () => {
+  let component: PoseTutorialComponent;
+  let fixture: ComponentFixture<PoseTutorialComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShadowTutorialComponent],
+      declarations: [PoseTutorialComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShadowTutorialComponent);
+    fixture = TestBed.createComponent(PoseTutorialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

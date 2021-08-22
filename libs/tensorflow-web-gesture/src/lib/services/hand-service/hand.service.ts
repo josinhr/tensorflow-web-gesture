@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import '@tensorflow/tfjs-backend-webgl';
-import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import * as handpose from '@tensorflow-models/handpose';
 import { GestureEstimation } from './hand-gesture.service';
 import { MovementEstimation } from './hand-movement.service';
@@ -54,15 +54,20 @@ export class HandGestureService {
     };
   }
 
-  public getSubscribersArray(): Map<string, Observable<Direction | Gesture>> {
+  public getMovementSubscribersArray(): Map<string, Observable<Direction>> {
     return new Map([
       ['right', this.subscribers.right],
       ['left', this.subscribers.left],
       ['up', this.subscribers.up],
       ['down', this.subscribers.down],
-      // this.subscribers.cero,
-      // this.subscribers.victory,
-      // this.subscribers.one,
+    ]);
+  }
+  public getPoseSubscribersArray(): Map<string, Observable<Gesture>> {
+    return new Map([
+      ['cero', this.subscribers.cero],
+      ['victory', this.subscribers.victory],
+      ['one', this.subscribers.one],
+      ['ok', this.subscribers.ok],
     ]);
   }
 

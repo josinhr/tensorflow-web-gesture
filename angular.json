@@ -52,7 +52,7 @@
               "apps/lib-appliance/src/assets",
               {
                 "glob": "**/*",
-                "input": "./node_modules/tensorflow-web-gesture/assets",
+                "input": "./libs/tensorflow-web-gesture/assets",
                 "output": "/assets/"
               }
             ],

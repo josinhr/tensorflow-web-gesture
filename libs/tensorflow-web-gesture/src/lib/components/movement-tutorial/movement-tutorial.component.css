@@ -1,0 +1,44 @@
+.tutorial {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 20px 0px;
+}
+
+h1 {
+  font-size: 4vmin;
+  margin: 15px;
+}
+h2 {
+  font-size: 2vmin;
+  margin: 15px;
+}
+
+.video-feedback {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 23px 23px 23px 23px;
+}
+
+.tutorial {
+  margin: 40px 0px;
+  background-color: white;
+  border-radius: 23px 23px 23px 23px;
+  width: 100%;
+}
+
+.feedback {
+  width: 300px;
+  max-width: 300px;
+  min-width: 300px;
+}
+.video {
+  padding: 20px;
+  width: 600px;
+}
