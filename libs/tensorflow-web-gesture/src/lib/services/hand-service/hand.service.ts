@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import '@tensorflow/tfjs-backend-webgl';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import * as handpose from '@tensorflow-models/handpose';
 import { GestureEstimation } from './hand-gesture.service';
 import { MovementEstimation } from './hand-movement.service';
@@ -20,6 +20,7 @@ export class HandGestureService {
   private _gesture$ = new BehaviorSubject<Gesture>('none');
   private gesture$ = this._gesture$.asObservable();
   public subscribers: Subscribers;
+  public modelLoaded = false;
   constructor() {
     this.gestureEstimator = new GestureEstimation();
     this.initializeSubscribers();
@@ -53,10 +54,23 @@ export class HandGestureService {
     };
   }
 
+  public getSubscribersArray(): Map<string, Observable<Direction | Gesture>> {
+    return new Map([
+      ['right', this.subscribers.right],
+      ['left', this.subscribers.left],
+      ['up', this.subscribers.up],
+      ['down', this.subscribers.down],
+      // this.subscribers.cero,
+      // this.subscribers.victory,
+      // this.subscribers.one,
+    ]);
+  }
+
   runModel() {
     handpose
       .load()
       .then((model) => {
+        this.modelLoaded = true;
         //Start data processing system -> Video procesor
         const runDetection = () => {
           model.estimateHands(this.video).then((predictions) => {

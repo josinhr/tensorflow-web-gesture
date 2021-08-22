@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background: hsl(204 100% 5%);
+
+  min-block-size: 100%;
+  min-inline-size: 100%;
+  box-sizing: border-box;
+  display: grid;
+  place-content: center;
+  font-family: system-ui;
+  font-size: min(200%, 5vmin);
+}
+
+html {
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+body {
+  margin: 0;
+}

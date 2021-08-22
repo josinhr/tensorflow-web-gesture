@@ -5,3 +5,7 @@
   -webkit-transform: rotateY(180deg); /* Safari and Chrome */
   -moz-transform: rotateY(180deg); /* Firefox */
 }
+
+video {
+  border-radius: 23px 23px 23px 23px;
+}

@@ -8,36 +8,39 @@ import { HandGestureService, ImageService } from '../../services';
 export class GestureFeedbackComponent {
   public image: string;
 
-  public constructor(private handGesture: HandGestureService) {
-    this.image = ImageService.getImageURL(ImageService.imagesType.unknown);
+  public constructor(
+    private handGesture: HandGestureService,
+    private imageService: ImageService
+  ) {
+    this.image = imageService.getImageURL(imageService.imagesType.unknown);
     this.handGesture.subscribers.right.subscribe(
       () =>
-        (this.image = ImageService.getImageURL(ImageService.imagesType.right))
+        (this.image = imageService.getImageURL(imageService.imagesType.right))
     );
     this.handGesture.subscribers.left.subscribe(
       () =>
-        (this.image = ImageService.getImageURL(ImageService.imagesType.left))
+        (this.image = imageService.getImageURL(imageService.imagesType.left))
     );
     this.handGesture.subscribers.up.subscribe(
-      () => (this.image = ImageService.getImageURL(ImageService.imagesType.up))
+      () => (this.image = imageService.getImageURL(imageService.imagesType.up))
     );
     this.handGesture.subscribers.down.subscribe(
       () =>
-        (this.image = ImageService.getImageURL(ImageService.imagesType.down))
+        (this.image = imageService.getImageURL(imageService.imagesType.down))
     );
     this.handGesture.subscribers.ok.subscribe(
-      () => (this.image = ImageService.getImageURL(ImageService.imagesType.ok))
+      () => (this.image = imageService.getImageURL(imageService.imagesType.ok))
     );
     this.handGesture.subscribers.victory.subscribe(
       () =>
-        (this.image = ImageService.getImageURL(ImageService.imagesType.victory))
+        (this.image = imageService.getImageURL(imageService.imagesType.victory))
     );
     this.handGesture.subscribers.one.subscribe(
-      () => (this.image = ImageService.getImageURL(ImageService.imagesType.one))
+      () => (this.image = imageService.getImageURL(imageService.imagesType.one))
     );
     this.handGesture.subscribers.cero.subscribe(
       () =>
-        (this.image = ImageService.getImageURL(ImageService.imagesType.cero))
+        (this.image = imageService.getImageURL(imageService.imagesType.cero))
     );
   }
 }

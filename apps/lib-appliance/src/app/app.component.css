@@ -1,0 +1,24 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+}
+
+.video-feedback {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+}
+
+.feedback {
+  padding: 20px;
+  width: 300px;
+  max-width: 300px;
+  min-width: 300px;
+}
+.video {
+  padding: 20px;
+}

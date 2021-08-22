@@ -1,5 +1,8 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
 export class ImageService {
-  static imagesType = {
+  imagesType = {
     right: 'right',
     one: 'one',
     cero: 'cero',
@@ -10,7 +13,7 @@ export class ImageService {
     victory: 'victory',
     unknown: '2754',
   };
-  static getImageURL(image: string): string {
+  getImageURL(image: string): string {
     return '/assets/' + image + '.png';
   }
 }
