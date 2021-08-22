@@ -1,17 +1,17 @@
 {
   "name": "tensorflow-web-gesture",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "peerDependencies": {
-    "@angular/common": "^12.0.0",
-    "@angular/core": "^12.0.0"
+    "@angular/common": "12.2.2",
+    "@angular/core": "12.2.2"
   },
   "nonPeerAllowedDependencies": {
-    "@tensorflow/tfjs-backend-webgl": "^3.6.0",
+    "@tensorflow/tfjs-backend-webgl": "3.8.0",
     "@tensorflow-models/handpose": "^0.0.7",
     "fingerpose": "^0.0.2",
     "handtrackjs": "^0.1.5"
   },
   "dependencies": {
-    "tslib": "^2.1.0"
+    "tslib": "2.3.0"
   }
 }
