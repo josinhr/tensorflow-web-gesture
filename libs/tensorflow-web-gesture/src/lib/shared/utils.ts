@@ -48,14 +48,14 @@ type Direction = 'left' | 'right' | 'up' | 'down' | 'none';
 type Rect = { topLeft: [number, number]; bottomRight: [number, number] };
 
 type Subscribers = {
-  left: Observable<Direction>;
-  right: Observable<Direction>;
-  up: Observable<Direction>;
-  down: Observable<Direction>;
-  ok: Observable<Gesture>;
-  victory: Observable<Gesture>;
-  one: Observable<Gesture>;
-  cero: Observable<Gesture>;
+  left$: Observable<Direction>;
+  right$: Observable<Direction>;
+  up$: Observable<Direction>;
+  down$: Observable<Direction>;
+  ok$: Observable<Gesture>;
+  victory$: Observable<Gesture>;
+  one$: Observable<Gesture>;
+  cero$: Observable<Gesture>;
 };
 
 export {

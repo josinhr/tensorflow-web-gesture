@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { HandGestureService, ImageService } from '../../services';
 
 @Component({
@@ -6,12 +7,20 @@ import { HandGestureService, ImageService } from '../../services';
   templateUrl: './pose-tutorial.component.html',
   styleUrls: ['./pose-tutorial.component.css'],
 })
-export class PoseTutorialComponent {
+export class PoseTutorialComponent implements OnDestroy {
   image: string;
+  private subscritors = new Array<Subscription>();
 
   constructor(
     public handGesture: HandGestureService,
     public imageService: ImageService
+  ) {
+    this.startSubscriptions(handGesture, imageService);
+  }
+
+  private startSubscriptions(
+    handGesture: HandGestureService,
+    imageService: ImageService
   ) {
     const subscribers = handGesture.getPoseSubscribersArray();
     const subscribersKeys = Array.from(subscribers.keys());
@@ -21,11 +30,17 @@ export class PoseTutorialComponent {
     );
 
     for (let i = 0; i < longitud; i++) {
-      subscribers.get(subscribersKeys[i]).subscribe(() => {
-        this.image = imageService.getImageURL(
-          imageService.imagesType[subscribersKeys[(i + 1) % longitud]]
-        );
-      });
+      this.subscritors.push(
+        subscribers.get(subscribersKeys[i]).subscribe(() => {
+          this.image = imageService.getImageURL(
+            imageService.imagesType[subscribersKeys[(i + 1) % longitud]]
+          );
+        })
+      );
     }
+  }
+
+  ngOnDestroy() {
+    this.subscritors.forEach((s) => s.unsubscribe());
   }
 }

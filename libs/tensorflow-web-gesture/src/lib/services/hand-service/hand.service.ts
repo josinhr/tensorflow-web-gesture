@@ -15,10 +15,8 @@ export class HandGestureService {
   private movementEstimator: MovementEstimation;
   private gestureEstimator: GestureEstimation;
 
-  private _swipe$ = new BehaviorSubject<Direction>('none');
-  private swipe$ = this._swipe$.asObservable();
-  private _gesture$ = new BehaviorSubject<Gesture>('none');
-  private gesture$ = this._gesture$.asObservable();
+  private swipe$ = new BehaviorSubject<Direction>('none');
+  private gesture$ = new BehaviorSubject<Gesture>('none');
   public subscribers: Subscribers;
   public modelLoaded = false;
   constructor() {
@@ -43,31 +41,31 @@ export class HandGestureService {
   private initializeSubscribers(): void {
     //Output of recognition -> Listens to the data manager
     this.subscribers = {
-      right: this.swipe$.pipe(filter((value) => value === 'right')),
-      left: this.swipe$.pipe(filter((value) => value === 'left')),
-      up: this.swipe$.pipe(filter((value) => value === 'up')),
-      down: this.swipe$.pipe(filter((value) => value === 'down')),
-      ok: this.gesture$.pipe(filter((value) => value === 'thumbs_up')),
-      cero: this.gesture$.pipe(filter((value) => value === 'cero')),
-      victory: this.gesture$.pipe(filter((value) => value === 'victory')),
-      one: this.gesture$.pipe(filter((value) => value === 'one_finger')),
+      right$: this.swipe$.pipe(filter((value) => value === 'right')),
+      left$: this.swipe$.pipe(filter((value) => value === 'left')),
+      up$: this.swipe$.pipe(filter((value) => value === 'up')),
+      down$: this.swipe$.pipe(filter((value) => value === 'down')),
+      ok$: this.gesture$.pipe(filter((value) => value === 'thumbs_up')),
+      cero$: this.gesture$.pipe(filter((value) => value === 'cero')),
+      victory$: this.gesture$.pipe(filter((value) => value === 'victory')),
+      one$: this.gesture$.pipe(filter((value) => value === 'one_finger')),
     };
   }
 
   public getMovementSubscribersArray(): Map<string, Observable<Direction>> {
     return new Map([
-      ['right', this.subscribers.right],
-      ['left', this.subscribers.left],
-      ['up', this.subscribers.up],
-      ['down', this.subscribers.down],
+      ['right', this.subscribers.right$],
+      ['left', this.subscribers.left$],
+      ['up', this.subscribers.up$],
+      ['down', this.subscribers.down$],
     ]);
   }
   public getPoseSubscribersArray(): Map<string, Observable<Gesture>> {
     return new Map([
-      ['cero', this.subscribers.cero],
-      ['victory', this.subscribers.victory],
-      ['one', this.subscribers.one],
-      ['ok', this.subscribers.ok],
+      ['cero', this.subscribers.cero$],
+      ['victory', this.subscribers.victory$],
+      ['one', this.subscribers.one$],
+      ['ok', this.subscribers.ok$],
     ]);
   }
 
@@ -83,12 +81,12 @@ export class HandGestureService {
               //Run gesture detection
               this.gestureEstimator.estimateGestures(
                 predictions[0].landmarks,
-                this._gesture$
+                this.gesture$
               );
               //Run movement detection
               this.movementEstimator.estimateHand(
                 predictions[0].boundingBox,
-                this._swipe$
+                this.swipe$
               );
             }
             requestAnimationFrame(runDetection);
