@@ -4,11 +4,17 @@ function toSeconds(ms: number): number {
   return ms / 1000;
 }
 
-function aroundCenter(center: Point, dimesions: Size): boolean {
-  return inRegion(0.4, 0.6, center, dimesions);
+function aroundCenter(center: Point, dimensions: Size): boolean {
+  console.log(dimensions);
+  console.log(inRegionY(0.4, 0.6, center, dimensions));
+
+  return (
+    inRegionX(0.35, 0.65, center, dimensions) &&
+    inRegionY(0.35, 0.65, center, dimensions)
+  );
 }
 
-function inRegion(
+function inRegionX(
   start: number,
   end: number,
   point: Point,
@@ -58,7 +64,7 @@ type Subscribers = {
 export {
   toSeconds,
   aroundCenter,
-  inRegion,
+  inRegionX,
   getMiddle,
   Size,
   Point,

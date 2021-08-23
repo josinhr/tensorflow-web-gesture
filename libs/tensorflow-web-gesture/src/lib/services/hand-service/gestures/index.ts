@@ -4,9 +4,9 @@ import * as fingerpose from 'fingerpose';
 import { oneFingerGesture } from './oneFingerGesture';
 import { noFingerGesture } from './noFingerGesture';
 import { victoryGesture } from './victoryGesture';
-// import { thumbsUpGesture } from './thumbsUpGesture';
+import { thumbsUpGesture } from './thumbsUpGesture';
 
-const thumbsUpGesture = fingerpose.Gestures.ThumbsUpGesture;
+// const thumbsUpGesture = fingerpose.Gestures.ThumbsUpGesture;
 
 export const GE = new fingerpose.GestureEstimator([
   oneFingerGesture,

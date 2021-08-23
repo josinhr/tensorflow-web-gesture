@@ -26,7 +26,6 @@ export class PoseTutorialComponent {
           imageService.imagesType[subscribersKeys[(i + 1) % longitud]]
         );
       });
-      console.log(i + ' ' + subscribersKeys[i]);
     }
   }
 }

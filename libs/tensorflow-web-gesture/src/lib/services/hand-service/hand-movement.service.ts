@@ -3,7 +3,7 @@ import {
   Rect,
   getMiddle,
   aroundCenter,
-  inRegion,
+  inRegionX,
   toSeconds,
   Size,
   inRegionY,
@@ -26,41 +26,40 @@ export class MovementEstimation {
       this.initiated = true;
       return;
     }
-    if (!this.initiated) {
-      return;
-    }
-    if (
-      inRegionY(0, 0.2, middle, this.dimensions) &&
-      toSeconds(Date.now() - this.initialTimestamp) < 2
-    ) {
-      emitPoint.next('up');
-      this.initiated = false;
-      return;
-    }
-    if (
-      inRegionY(0.8, 1, middle, this.dimensions) &&
-      toSeconds(Date.now() - this.initialTimestamp) < 2
-    ) {
-      emitPoint.next('down');
-      this.initiated = false;
-      return;
-    }
+    if (this.initiated) {
+      if (
+        inRegionY(0, 0.1, middle, this.dimensions) &&
+        toSeconds(Date.now() - this.initialTimestamp) < 2
+      ) {
+        emitPoint.next('up');
+        this.initiated = false;
+        return;
+      }
+      if (
+        inRegionY(0.9, 1, middle, this.dimensions) &&
+        toSeconds(Date.now() - this.initialTimestamp) < 2
+      ) {
+        emitPoint.next('down');
+        this.initiated = false;
+        return;
+      }
 
-    if (
-      inRegion(0, 0.1, middle, this.dimensions) &&
-      toSeconds(Date.now() - this.initialTimestamp) < 2
-    ) {
-      emitPoint.next('right');
-      this.initiated = false;
-      return;
-    }
-    if (
-      inRegion(0.9, 1, middle, this.dimensions) &&
-      toSeconds(Date.now() - this.initialTimestamp) < 2
-    ) {
-      emitPoint.next('left');
-      this.initiated = false;
-      return;
+      if (
+        inRegionX(0, 0.1, middle, this.dimensions) &&
+        toSeconds(Date.now() - this.initialTimestamp) < 2
+      ) {
+        emitPoint.next('right');
+        this.initiated = false;
+        return;
+      }
+      if (
+        inRegionX(0.9, 1, middle, this.dimensions) &&
+        toSeconds(Date.now() - this.initialTimestamp) < 2
+      ) {
+        emitPoint.next('left');
+        this.initiated = false;
+        return;
+      }
     }
   }
 }

@@ -13,22 +13,25 @@ export class GestureEstimation {
     emitPoint: BehaviorSubject<Gesture>
   ) {
     const gesture = GE.estimate(landmarks, 4);
-    if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
-      const confidence = gesture.gestures.map(
-        (prediction: { confidence: number }) => prediction.confidence
-      );
 
-      const maxConfidence = confidence.indexOf(
-        Math.max.apply(null, confidence)
-      );
+    if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
+      let m = -1;
+      let maxConfidence = -1;
+
+      for (let i = 0; i < gesture.gestures.length; i++) {
+        if (gesture.gestures[i].confidence >= m) {
+          m = gesture.gestures[i].confidence;
+          maxConfidence = i;
+        }
+      }
+
       if (this.lastGesture !== gesture.gestures[maxConfidence].name) {
         this.lastGesture = gesture.gestures[maxConfidence].name;
         this.lastGestureTiemstamp = Date.now();
         this.emitGesture = true;
       } else if (
         this.emitGesture &&
-        toSeconds(Date.now() - this.lastGestureTiemstamp) > 1 &&
-        confidence[0] > 6
+        toSeconds(Date.now() - this.lastGestureTiemstamp) > 0.85
       ) {
         emitPoint.next(gesture.gestures[maxConfidence].name);
         this.emitGesture = false;
