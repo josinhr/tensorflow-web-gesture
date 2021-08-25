@@ -10,10 +10,11 @@ import {
 @Injectable()
 export class SubscribersManagementService {
   private classSubscritors = new Map<unknown, Array<Subscription>>();
-  swipe$ = new Subject<Direction>();
-  gesture$ = new Subject<Gesture>();
+  readonly swipe$ = new Subject<Direction>();
+  readonly gesture$ = new Subject<Gesture>();
 
   readonly subscribers: Subscribers;
+
   constructor() {
     this.subscribers = {
       right$: this.swipe$.pipe(filter((value) => value === 'right')),
