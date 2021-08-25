@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import '@tensorflow/tfjs-backend-webgl';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import * as handpose from '@tensorflow-models/handpose';
 import { GestureEstimation } from './hand-gesture.service';
 import { MovementEstimation } from './hand-movement.service';
@@ -15,8 +15,8 @@ export class HandGestureService {
   private movementEstimator: MovementEstimation;
   private gestureEstimator: GestureEstimation;
 
-  private swipe$ = new BehaviorSubject<Direction>('none');
-  private gesture$ = new BehaviorSubject<Gesture>('none');
+  private swipe$ = new Subject<Direction>();
+  private gesture$ = new Subject<Gesture>();
   public subscribers: Subscribers;
   public modelLoaded = false;
   constructor() {
