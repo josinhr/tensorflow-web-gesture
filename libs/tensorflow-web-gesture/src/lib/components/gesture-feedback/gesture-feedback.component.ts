@@ -11,18 +11,16 @@ export class GestureFeedbackComponent implements OnDestroy {
 
   public constructor(
     private imageService: ImageService,
-    private subscribersMaganagerServie: SubscribersManagementService
+    private subscribersMaganagerService: SubscribersManagementService
   ) {
     this.image = this.imageService.getImageURL(
       this.imageService.imagesType.unknown
     );
     const subscribersArray =
-      this.subscribersMaganagerServie.getAllSubscribersArray();
+      this.subscribersMaganagerService.getAllSubscribersArray();
 
     for (let i = 0; i < subscribersArray.length; i++) {
-      console.log(subscribersArray[i]);
-
-      this.subscribersMaganagerServie.addSubscriber(
+      this.subscribersMaganagerService.addSubscriber(
         this,
         subscribersArray[i].subscriber.subscribe(() => {
           this.image = this.imageService.getImageURL(
@@ -34,6 +32,6 @@ export class GestureFeedbackComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscribersMaganagerServie.unsubscribe(this);
+    this.subscribersMaganagerService.unsubscribe(this);
   }
 }

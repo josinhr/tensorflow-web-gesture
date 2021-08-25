@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, Subscription } from 'rxjs';
+import { Subject, filter, Subscription } from 'rxjs';
 import {
   Direction,
   GeneralSubscriber,
@@ -10,18 +10,22 @@ import {
 @Injectable()
 export class SubscribersManagementService {
   private classSubscritors = new Map<unknown, Array<Subscription>>();
-  readonly swipe$ = new BehaviorSubject<Direction>('none');
-  readonly gesture$ = new BehaviorSubject<Gesture>('none');
-  readonly subscribers: Subscribers = {
-    right$: this.swipe$.pipe(filter((value) => value === 'right')),
-    left$: this.swipe$.pipe(filter((value) => value === 'left')),
-    up$: this.swipe$.pipe(filter((value) => value === 'up')),
-    down$: this.swipe$.pipe(filter((value) => value === 'down')),
-    ok$: this.gesture$.pipe(filter((value) => value === 'thumbs_up')),
-    cero$: this.gesture$.pipe(filter((value) => value === 'cero')),
-    victory$: this.gesture$.pipe(filter((value) => value === 'victory')),
-    one$: this.gesture$.pipe(filter((value) => value === 'one_finger')),
-  };
+  swipe$ = new Subject<Direction>();
+  gesture$ = new Subject<Gesture>();
+
+  readonly subscribers: Subscribers;
+  constructor() {
+    this.subscribers = {
+      right$: this.swipe$.pipe(filter((value) => value === 'right')),
+      left$: this.swipe$.pipe(filter((value) => value === 'left')),
+      up$: this.swipe$.pipe(filter((value) => value === 'up')),
+      down$: this.swipe$.pipe(filter((value) => value === 'down')),
+      ok$: this.gesture$.pipe(filter((value) => value === 'thumbs_up')),
+      cero$: this.gesture$.pipe(filter((value) => value === 'cero')),
+      victory$: this.gesture$.pipe(filter((value) => value === 'victory')),
+      one$: this.gesture$.pipe(filter((value) => value === 'one_finger')),
+    };
+  }
 
   public addSubscriber(interested: unknown, subscriber: Subscription) {
     let arrayWithAddedSubscriber = this.classSubscritors.get(interested);

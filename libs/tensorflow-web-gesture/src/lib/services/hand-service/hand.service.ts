@@ -12,13 +12,13 @@ export class HandGestureService {
   private video: HTMLVideoElement;
   private movementEstimator: MovementEstimation;
   private gestureEstimator: GestureEstimation;
-  private subscribersMaganager: SubscribersManagementService;
+  private subscribersManager: SubscribersManagementService;
 
   public modelLoaded = false;
 
-  constructor() {
+  constructor(subscribersManager: SubscribersManagementService) {
     this.gestureEstimator = new GestureEstimation();
-    this.subscribersMaganager = new SubscribersManagementService();
+    this.subscribersManager = subscribersManager;
   }
 
   init(vid: HTMLVideoElement) {
@@ -48,12 +48,12 @@ export class HandGestureService {
               //Run gesture detection
               this.gestureEstimator.estimateGestures(
                 predictions[0].landmarks,
-                this.subscribersMaganager.gesture$
+                this.subscribersManager.gesture$
               );
               //Run movement detection
               this.movementEstimator.estimateHand(
                 predictions[0].boundingBox,
-                this.subscribersMaganager.swipe$
+                this.subscribersManager.swipe$
               );
             }
             requestAnimationFrame(runDetection);

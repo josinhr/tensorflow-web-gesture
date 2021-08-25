@@ -9,7 +9,7 @@ import {
   inRegionY,
   Direction,
 } from '../../shared/utils';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export class MovementEstimation {
   private initialTimestamp = -1;
@@ -18,7 +18,7 @@ export class MovementEstimation {
   constructor(dimensions: Size) {
     this.dimensions = dimensions;
   }
-  estimateHand(rect: Rect, emitPoint: BehaviorSubject<Direction>) {
+  estimateHand(rect: Rect, emitPoint: Subject<Direction>) {
     const middle = getMiddle(rect);
 
     if (aroundCenter(middle, this.dimensions)) {

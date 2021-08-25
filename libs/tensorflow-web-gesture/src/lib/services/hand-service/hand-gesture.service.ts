@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { GE } from './gestures';
 import { toSeconds, Gesture } from '../../shared/utils';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export class GestureEstimation {
   private lastGestureTiemstamp = -1;
@@ -10,7 +10,7 @@ export class GestureEstimation {
 
   estimateGestures(
     landmarks: Array<Array<number>>,
-    emitPoint: BehaviorSubject<Gesture>
+    emitPoint: Subject<Gesture>
   ) {
     const gesture = GE.estimate(landmarks, 4);
 
@@ -33,8 +33,6 @@ export class GestureEstimation {
         this.emitGesture &&
         toSeconds(Date.now() - this.lastGestureTiemstamp) > 0.85
       ) {
-        console.log('c');
-
         emitPoint.next(gesture.gestures[maxConfidence].name);
         this.emitGesture = false;
       }

@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit {
   title = 'lib-appliance';
   public constructor(
     public handGestureService: HandGestureService,
-    public subscribersMaganagerServie: SubscribersManagementService
+    public subscribersMaganagerService: SubscribersManagementService
   ) {}
   ngAfterViewInit(): void {
     const vid = <HTMLVideoElement>document.getElementById('videoElement');
