@@ -1,6 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { HandGestureService, ImageService } from '../../services';
+import { ImageService, SubscribersManagementService } from '../../services';
 
 @Component({
   selector: 'tensorflow-web-gesture-pose-tutorial',
@@ -9,31 +8,26 @@ import { HandGestureService, ImageService } from '../../services';
 })
 export class PoseTutorialComponent implements OnDestroy {
   image: string;
-  private subscritors = new Array<Subscription>();
 
   constructor(
-    public handGesture: HandGestureService,
+    public subscribersManagementService: SubscribersManagementService,
     public imageService: ImageService
   ) {
-    this.startSubscriptions(handGesture, imageService);
+    this.startSubscriptions();
   }
 
-  private startSubscriptions(
-    handGesture: HandGestureService,
-    imageService: ImageService
-  ) {
-    const subscribers = handGesture.getPoseSubscribersArray();
-    const subscribersKeys = Array.from(subscribers.keys());
-    const longitud = subscribers.size;
-    this.image = imageService.getImageURL(
-      imageService.imagesType[subscribersKeys[0]]
-    );
+  private startSubscriptions() {
+    const subscribers =
+      this.subscribersManagementService.getPoseSubscribersArray();
 
-    for (let i = 0; i < longitud; i++) {
-      this.subscritors.push(
-        subscribers.get(subscribersKeys[i]).subscribe(() => {
-          this.image = imageService.getImageURL(
-            imageService.imagesType[subscribersKeys[(i + 1) % longitud]]
+    for (let i = 0; i < subscribers.length; i++) {
+      this.subscribersManagementService.addSubscriber(
+        this,
+        subscribers[i].subscriber.subscribe(() => {
+          this.image = this.imageService.getImageURL(
+            this.imageService.imagesType[
+              subscribers[(i + 1) % subscribers.length].name
+            ]
           );
         })
       );
@@ -41,6 +35,6 @@ export class PoseTutorialComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscritors.forEach((s) => s.unsubscribe());
+    this.subscribersManagementService.unsubscribe(this);
   }
 }

@@ -33,6 +33,8 @@ export class GestureEstimation {
         this.emitGesture &&
         toSeconds(Date.now() - this.lastGestureTiemstamp) > 0.85
       ) {
+        console.log('c');
+
         emitPoint.next(gesture.gestures[maxConfidence].name);
         this.emitGesture = false;
       }

@@ -1,6 +1,6 @@
 <div class="main-container">
   <tensorflow-web-gesture-movement-tutorial></tensorflow-web-gesture-movement-tutorial>
 </div>
-<div *ngIf="(handGestureService.subscribers.left$ | async) === 'left'">
+<div *ngIf="(subscribersMaganagerServie.subscribers.left$ | async) === 'left'">
   Has movido a la izquierda
 </div>

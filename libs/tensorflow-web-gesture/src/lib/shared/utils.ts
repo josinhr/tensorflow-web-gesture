@@ -6,8 +6,8 @@ function toSeconds(ms: number): number {
 
 function aroundCenter(center: Point, dimensions: Size): boolean {
   return (
-    inRegionX(0.35, 0.65, center, dimensions) &&
-    inRegionY(0.35, 0.65, center, dimensions)
+    inRegionX(0.3, 0.7, center, dimensions) &&
+    inRegionY(0.3, 0.7, center, dimensions)
   );
 }
 
@@ -58,6 +58,11 @@ type Subscribers = {
   cero$: Observable<Gesture>;
 };
 
+type GeneralSubscriber = {
+  name: string;
+  subscriber: Observable<Direction | Gesture>;
+};
+
 export {
   toSeconds,
   aroundCenter,
@@ -68,6 +73,7 @@ export {
   Gesture,
   Direction,
   Rect,
+  GeneralSubscriber,
   inRegionY,
   Subscribers,
 };

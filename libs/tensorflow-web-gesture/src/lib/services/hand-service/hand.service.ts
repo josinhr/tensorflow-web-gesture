@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import '@tensorflow/tfjs-backend-webgl';
-import { BehaviorSubject, Observable } from 'rxjs';
 import * as handpose from '@tensorflow-models/handpose';
 import { GestureEstimation } from './hand-gesture.service';
 import { MovementEstimation } from './hand-movement.service';
-import { Direction, Gesture, Subscribers } from '../../shared/utils';
-import { filter } from 'rxjs/operators';
+import { SubscribersManagementService } from './subscribers-management.service';
 import { Injectable } from '@angular/core';
 
 //The data manager
@@ -14,15 +12,15 @@ export class HandGestureService {
   private video: HTMLVideoElement;
   private movementEstimator: MovementEstimation;
   private gestureEstimator: GestureEstimation;
+  private subscribersMaganager: SubscribersManagementService;
 
-  private swipe$ = new BehaviorSubject<Direction>('none');
-  private gesture$ = new BehaviorSubject<Gesture>('none');
-  public subscribers: Subscribers;
   public modelLoaded = false;
+
   constructor() {
     this.gestureEstimator = new GestureEstimation();
-    this.initializeSubscribers();
+    this.subscribersMaganager = new SubscribersManagementService();
   }
+
   init(vid: HTMLVideoElement) {
     vid.addEventListener(
       'loadeddata',
@@ -38,37 +36,6 @@ export class HandGestureService {
       false
     );
   }
-  private initializeSubscribers(): void {
-    //Output of recognition -> Listens to the data manager
-    this.subscribers = {
-      right$: this.swipe$.pipe(filter((value) => value === 'right')),
-      left$: this.swipe$.pipe(filter((value) => value === 'left')),
-      up$: this.swipe$.pipe(filter((value) => value === 'up')),
-      down$: this.swipe$.pipe(filter((value) => value === 'down')),
-      ok$: this.gesture$.pipe(filter((value) => value === 'thumbs_up')),
-      cero$: this.gesture$.pipe(filter((value) => value === 'cero')),
-      victory$: this.gesture$.pipe(filter((value) => value === 'victory')),
-      one$: this.gesture$.pipe(filter((value) => value === 'one_finger')),
-    };
-  }
-
-  public getMovementSubscribersArray(): Map<string, Observable<Direction>> {
-    return new Map([
-      ['right', this.subscribers.right$],
-      ['left', this.subscribers.left$],
-      ['up', this.subscribers.up$],
-      ['down', this.subscribers.down$],
-    ]);
-  }
-  public getPoseSubscribersArray(): Map<string, Observable<Gesture>> {
-    return new Map([
-      ['cero', this.subscribers.cero$],
-      ['victory', this.subscribers.victory$],
-      ['one', this.subscribers.one$],
-      ['ok', this.subscribers.ok$],
-    ]);
-  }
-
   runModel() {
     handpose
       .load()
@@ -81,12 +48,12 @@ export class HandGestureService {
               //Run gesture detection
               this.gestureEstimator.estimateGestures(
                 predictions[0].landmarks,
-                this.gesture$
+                this.subscribersMaganager.gesture$
               );
               //Run movement detection
               this.movementEstimator.estimateHand(
                 predictions[0].boundingBox,
-                this.swipe$
+                this.subscribersMaganager.swipe$
               );
             }
             requestAnimationFrame(runDetection);

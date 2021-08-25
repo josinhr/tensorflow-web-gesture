@@ -29,7 +29,7 @@ export class MovementEstimation {
     if (this.initiated) {
       if (
         inRegionY(0, 0.1, middle, this.dimensions) &&
-        toSeconds(Date.now() - this.initialTimestamp) < 2
+        toSeconds(Date.now() - this.initialTimestamp) < 1
       ) {
         emitPoint.next('up');
         this.initiated = false;
@@ -37,7 +37,7 @@ export class MovementEstimation {
       }
       if (
         inRegionY(0.9, 1, middle, this.dimensions) &&
-        toSeconds(Date.now() - this.initialTimestamp) < 2
+        toSeconds(Date.now() - this.initialTimestamp) < 1
       ) {
         emitPoint.next('down');
         this.initiated = false;
@@ -46,7 +46,7 @@ export class MovementEstimation {
 
       if (
         inRegionX(0, 0.1, middle, this.dimensions) &&
-        toSeconds(Date.now() - this.initialTimestamp) < 2
+        toSeconds(Date.now() - this.initialTimestamp) < 1
       ) {
         emitPoint.next('right');
         this.initiated = false;
@@ -54,7 +54,7 @@ export class MovementEstimation {
       }
       if (
         inRegionX(0.9, 1, middle, this.dimensions) &&
-        toSeconds(Date.now() - this.initialTimestamp) < 2
+        toSeconds(Date.now() - this.initialTimestamp) < 1
       ) {
         emitPoint.next('left');
         this.initiated = false;

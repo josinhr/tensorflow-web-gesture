@@ -1,5 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { HandGestureService } from 'tensorflow-web-gesture';
+import {
+  HandGestureService,
+  SubscribersManagementService,
+} from 'tensorflow-web-gesture';
 
 @Component({
   selector: 'tensorflow-web-gesture-root',
@@ -9,7 +12,10 @@ import { HandGestureService } from 'tensorflow-web-gesture';
 })
 export class AppComponent implements AfterViewInit {
   title = 'lib-appliance';
-  public constructor(public handGestureService: HandGestureService) {}
+  public constructor(
+    public handGestureService: HandGestureService,
+    public subscribersMaganagerServie: SubscribersManagementService
+  ) {}
   ngAfterViewInit(): void {
     const vid = <HTMLVideoElement>document.getElementById('videoElement');
 

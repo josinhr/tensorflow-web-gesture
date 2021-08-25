@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { HandGestureService, ImageService } from '../../services';
+import { ImageService } from '../../services';
+import { SubscribersManagementService } from '../../services/hand-service/subscribers-management.service';
 @Component({
   selector: 'tensorflow-web-gesture-gesture-feedback',
   templateUrl: './gesture-feedback.component.html',
@@ -8,37 +8,25 @@ import { HandGestureService, ImageService } from '../../services';
 })
 export class GestureFeedbackComponent implements OnDestroy {
   public image: string;
-  private subscritors = new Array<Subscription>();
 
   public constructor(
-    private handGesture: HandGestureService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private subscribersMaganagerServie: SubscribersManagementService
   ) {
-    this.image = imageService.getImageURL(imageService.imagesType.unknown);
-    this.startSubscriptions(imageService);
-  }
+    this.image = this.imageService.getImageURL(
+      this.imageService.imagesType.unknown
+    );
+    const subscribersArray =
+      this.subscribersMaganagerServie.getAllSubscribersArray();
 
-  private startSubscriptions(imageService: ImageService) {
-    const movementSubscribersMap =
-      this.handGesture.getMovementSubscribersArray();
-    const poseSubscribersMap = this.handGesture.getPoseSubscribersArray();
-    const movementSubscribers = Array.from(movementSubscribersMap.keys());
-    const poseSubscribers = Array.from(poseSubscribersMap.keys());
+    for (let i = 0; i < subscribersArray.length; i++) {
+      console.log(subscribersArray[i]);
 
-    for (let i = 0; i < movementSubscribers.length; i++) {
-      this.subscritors.push(
-        movementSubscribersMap.get(movementSubscribers[i]).subscribe(() => {
-          this.image = imageService.getImageURL(
-            imageService.imagesType[movementSubscribers[i]]
-          );
-        })
-      );
-    }
-    for (let i = 0; i < poseSubscribers.length; i++) {
-      this.subscritors.push(
-        poseSubscribersMap.get(poseSubscribers[i]).subscribe(() => {
-          this.image = imageService.getImageURL(
-            imageService.imagesType[poseSubscribers[i]]
+      this.subscribersMaganagerServie.addSubscriber(
+        this,
+        subscribersArray[i].subscriber.subscribe(() => {
+          this.image = this.imageService.getImageURL(
+            this.imageService.imagesType[subscribersArray[i].name]
           );
         })
       );
@@ -46,6 +34,6 @@ export class GestureFeedbackComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscritors.forEach((s) => s.unsubscribe());
+    this.subscribersMaganagerServie.unsubscribe(this);
   }
 }
