@@ -87,13 +87,39 @@ Or you can create also your own video element.
        Hello world
     </div>
     
-   6.2.The use of subscribers. This use is not recommended, you would have to manage the subscriptions and unsubscription. You can include that code inside the constructor.
+   6.2.The use of subscribers. This use is not recommended, you would have to manage the subscriptions and unsubscription. You can include that code inside the constructor.Then you also have to unsubscribe. For that, we have implemented a service that manages this. In constructor we have to add SubscriberManagementService.
    
-     handGestureService.subscribers.right.subscribe(() => {
-      consoloe.log('Hello world')
-    });
+    constructor(
+    public imageService: ImageService,
+    public subscribersManagementService: SubscribersManagementService
+    )
+  
+  
+  Get needed subscribers
+  
+  
+    const subscribers =
+        this.subscribersManagementService.getMovementSubscribersArray();
+      
+Then subscribe to them
 
+    this.subscribersManagementService.addSubscriber(
+          this,
+          subscribers[i].subscriber.subscribe(() => {
+           //Inside some code
+            );
+         })
+        );
 
+And finaly we have to implement onDestroy, that will remove the subscriptions after view is out.
+
+    export class ClassName implements OnDestroy
+    
+Use the unsubscription of the service  
+  
+    ngOnDestroy() {
+      this.subscribersManagementService.unsubscribe(this);
+    }
 
 # Nx Documentation
 
