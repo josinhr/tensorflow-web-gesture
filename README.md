@@ -2,7 +2,6 @@
 # TensorflowWebGesture
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/56626396/130964846-e9b857d5-1888-48f5-82d0-6c483d0e70ff.gif)
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/56626396/130964414-d9f036cd-b2fa-4f73-a969-f0ab4174f777.gif)
-![image](https://user-images.githubusercontent.com/56626396/126620510-aa9f3821-995c-4222-a0d5-b7875b2d4850.png)
 
 
 Tensorflow Web Gesture it's an angular library developed in order to implement gesture interaction in every existing web page. Here I will define how to use it and wich important aspects you should know. Also two important links:
