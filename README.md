@@ -10,7 +10,7 @@ Tensorflow Web Gesture it's an angular library developed in order to implement g
 ******\*\*******\*\*\*\*******\*\*******Soon******\*\*******\*\*\*\*******\*\*******
 
 -Example of implementation:
-https://github.com/josistem sends a confirmation mail to the unhr/smart-tv-example
+https://github.com/josinhr/smart-tv-example
 
 Let's go with the steps:
 
