@@ -5,7 +5,7 @@
 
 Tensorflow Web Gesture it's an angular library developed in order to implement gesture interaction in every existing web page. Here I will define how to use it and wich important aspects you should know. Also two important links:
 
--Thesis documentation:(https://www.linkedin.com/in/jose-her-rizo/details/featured/1635525979640/single-media-viewer/?profileId=ACoAAC1fVF4BA5HeirQliDhYUN73BbX5GsqtYxI)
+-Thesis documentation:(https://drive.google.com/file/d/1bRu7PSNf-0XpSJfZMFZ65Y0qWVBy2vbV/view?usp=sharing)
 
 -Example of implementation:
 https://github.com/josinhr/smart-tv-example
